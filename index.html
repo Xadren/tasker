@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="main.js"></script>
+        <link rel="stylesheet" type="text/css" href="custom.css"/>
         <title>Tasker</title>
     </head>
     <body>
@@ -26,12 +27,66 @@
         <div id="main">
             <!-- A left hand section to show different categories tasks can be grouped under as well as the option to add a new task -->
             <section class="tasker-left">
-
+                <div class="categories">
+                    <ul>
+                        <li>Uni</li>
+                        <li>Work</li>
+                        <li>Personal</li>
+                    </ul>
+                </div>
+                <div class="add-project">
+                    <button id="add-project">Add Project +</button>
+                </div>
             </section>
             <!-- The main section that will display all the tasks that meet the current filter. -->
             <section class="tasker-list">
 
             </section>
         </div>
+
+        <div id="project-modal" class="modal">
+                <div class="modal-content-wrapper">
+                    <div class="modal-content">
+                        <div id="project-modal_head">
+    
+                        </div>
+    
+                        <div id="project-modal_body">
+                            <form class="project-form">
+                                <label for="project-name">Project Name</label>: <input type="name" placeholder="Assignment 2" name="project-name"><br/>
+                                <label for="due-date">Due Date</label>: <input type="date" name="due-date" value=""><br/>
+                                <hr>
+                                <h2>Tasks</h2>
+                                <div class="project-tasks">
+                                    <div class="project-tasks_left">
+                                        <strong class="task-name-title">Task Name</strong><br/>
+                                        <input type="text" class="project-task" placeholder="2.1 Proposal Presentation">
+                                    </div>
+                                    <div class="project-tasks_middle">
+                                            <strong class="task-name-title">Task Description</strong><br/>
+                                            <textarea class="project-task-description"></textarea>
+                                        </div>
+                                    <div class="project-tasks_right">
+                                        <strong class="task-weight-title">Weighting (%)</strong><br/>
+                                        <input type="number" class="task-weighting" min="0" max="100">
+                                    </div>
+                                    <br/><br/>
+
+                                    <button type="button" id="new-task-button">New Task +</button>
+                                </div>
+                                 
+                            </form>                            
+                        </div>
+
+
+
+                        <br/>
+                        <div id="project-modal_actions">
+                            <button>Add</button>
+                            <button id="project-modal_close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </body>
 </html>
