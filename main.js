@@ -70,8 +70,37 @@ class TaskerList{
 
         // Populate the list.
         projects.forEach(project => {
-            this.list_body.insertAdjacentHTML('beforeend', `<h1>${project.name}</h1>`);
+            const project_output = this.fillTemplate(project);
+            this.list_body.insertAdjacentHTML('beforeend', `${project_output}`);
         })
+    }
+
+    fillTemplate(project){
+        const name = project.name;
+        const due_date = project.due_date;
+        let tasks = new String();
+        project.tasks.forEach(task => {
+            tasks += `
+                <div class="task">
+                    <strong>${task.name}</strong><br/>
+                    <small>${task.weight}%</small><br/>
+                    <p>${task.description}</p>
+                </div>
+            `;
+        })
+
+        const template = `
+            <div class="project">
+                <h1>${name}</h1>
+                <strong>Due Date:</strong> ${due_date}
+                <h2>Tasks</h2>
+                <div class="tasks">
+                    ${tasks}
+                </div>
+            </div>
+        `;
+
+        return template;
     }
 }
 
@@ -111,7 +140,9 @@ class ProjectModal{
         // Reset the project tasks.
         const tasks_div = document.querySelector(".project-tasks");
         while(tasks_div.firstChild){
-            tasks_div.removeChild(tasks_div.firstChild);
+            // if(tasks_div.firstChild.nodeName != "BUTTON"){
+                tasks_div.removeChild(tasks_div.firstChild);
+            // }
         }
 
         tasks_div.insertAdjacentHTML('afterbegin', `
@@ -128,8 +159,6 @@ class ProjectModal{
             <input type="number" class="task-weighting" min="0" max="100" data-task-num="0">
         </div>
         <br/><br/>
-
-        <button type="button" id="new-task-button">New Task +</button>
         `)
         this.modal.style.display = "block";
     }
