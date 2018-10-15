@@ -60,15 +60,15 @@
                                 <div class="project-tasks">
                                     <div class="project-tasks_left">
                                         <strong class="task-name-title">Task Name</strong><br/>
-                                        <input type="text" class="project-task" placeholder="2.1 Proposal Presentation">
+                                        <input type="text" class="project-task" placeholder="2.1 Proposal Presentation" data-task-num="0">
                                     </div>
                                     <div class="project-tasks_middle">
                                             <strong class="task-name-title">Task Description</strong><br/>
-                                            <textarea class="project-task-description"></textarea>
+                                            <textarea class="project-task-description" data-task-num="0"></textarea>
                                         </div>
                                     <div class="project-tasks_right">
                                         <strong class="task-weight-title">Weighting (%)</strong><br/>
-                                        <input type="number" class="task-weighting" min="0" max="100">
+                                        <input type="number" class="task-weighting" min="0" max="100" data-task-num="0">
                                     </div>
                                     <br/><br/>
 
@@ -82,7 +82,7 @@
 
                         <br/>
                         <div id="project-modal_actions">
-                            <button>Add</button>
+                            <button id="confirm-add-project">Add</button>
                             <button id="project-modal_close">Close</button>
                         </div>
                     </div>
