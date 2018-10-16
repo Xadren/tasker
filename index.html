@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="main.js"></script>
         <link rel="stylesheet" type="text/css" href="custom.css"/>
-        <link rel="stylesheet" href="https://use.typekit.net/dad4gku.css">
+        <link rel="stylesheet" href="https://use.typekit.net/dad4gku.css" />
+        <link rel="icon" href="_images/tab_icon.png" />
         <title>Tasker</title>
     </head>
     <body>
@@ -32,19 +33,20 @@
                 <div class="categories">
                     <h1>Categories</h1>
                     <ul>
-                        <li>Uni</li>
-                        <li>Work</li>
-                        <li>Personal</li>
+                        <li><div class="cat-color uni-cat"></div>Uni</li>
+                        <li><div class="cat-color work-cat"></div>Work</li>
+                        <li><div class="cat-color personal-cat"></div>Personal</li>
                     </ul>
                 </div>
-                <div class="add-project">
-                    <button id="add-project">Add Project +</button>
-                </div>
+                
             </section>
             <!-- The main section that will display all the tasks that meet the current filter. -->
             <section class="tasker-list">
 
             </section>
+            <div class="add-project">
+                <button id="add-project" tooltip="Add a Project" tooltip-position="left">+</button>
+            </div>
         </div>
 
         <div id="project-modal" class="modal">
