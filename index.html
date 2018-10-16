@@ -6,17 +6,19 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="main.js"></script>
         <link rel="stylesheet" type="text/css" href="custom.css"/>
+        <link rel="stylesheet" href="https://use.typekit.net/dad4gku.css">
         <title>Tasker</title>
     </head>
     <body>
         <nav>
             <div class="nav-left">
                 <span class="hb-menu"></span>
-                <img src="_images/icon.png" alt="Tasker Icon"/>
+                <img src="_images/icon.svg" alt="Tasker Icon" class="tasker-icon"/>
                 <h1>Tasker</h1>
             </div>
             <div class="nav-right">
-                <img src="_images/search.png" alt="Search icon"/>
+                <img src="_images/search.svg" alt="Search icon" class="search-icon"/>
+                <input type="text" name="search-input" placeholder="Search" />
                 <select name="task-filter" id="task-filter">
                     <option value="day" class="filter-option">Days</option>
                     <option value="week" class="filter-option">Week</option>
@@ -28,6 +30,7 @@
             <!-- A left hand section to show different categories tasks can be grouped under as well as the option to add a new task -->
             <section class="tasker-left">
                 <div class="categories">
+                    <h1>Categories</h1>
                     <ul>
                         <li>Uni</li>
                         <li>Work</li>

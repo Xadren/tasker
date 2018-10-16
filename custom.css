@@ -2,6 +2,11 @@ html, body{
     margin: 0px;
     padding: 0px;
 }
+body{
+    font-family: futura-pt, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
 
 nav{
     display: flex;
@@ -13,7 +18,15 @@ nav{
 }
 
 nav>.nav-left{
-    justify-content: flex-start;
+    display: flex;
+    margin-left: 125px;
+}
+
+nav>.nav-left>h1{
+    font-weight: 500;
+    font-size: 22px;
+    margin: auto 0px;
+    opacity: .54;
 }
 nav>.nav-left>*{
     display: inline-block;
@@ -21,10 +34,14 @@ nav>.nav-left>*{
 }
 
 nav>.nav-right{
-   justify-content: flex-end;
+   display: flex;
+   align-self: center;
+   position: absolute;
+   right: 50px;
 }
 nav>.nav-right>*{
     display: inline-block;
+    margin: 0px 2.5px;
 }
 
 section.tasker-left{
@@ -34,6 +51,19 @@ section.tasker-left{
     position: fixed;
     width: 15%;
     border-right: 2px solid #dad9d9;
+    padding: 3px;
+}
+
+img.tasker-icon{
+    width: 35px;
+    height: 35px;
+    margin: auto 5px auto 0px;
+}
+
+img.search-icon{
+    width: 25px;
+    height: 25px;
+    margin: auto 5px auto 0px;
 }
 
 
