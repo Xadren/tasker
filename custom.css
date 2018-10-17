@@ -266,9 +266,6 @@ button#add-project:hover{
     display: flex;
 }
 
-/* .project-details>.input-group{
-    margin-left:0px;
-} */
 input, textarea, select{
     position: relative;
     font-size:18px;
@@ -279,6 +276,10 @@ input, textarea, select{
     border-bottom:1px solid #757575;
     border-radius: 2px;
     background-color: #dad9d9;
+}
+
+textarea{
+    resize: none;
 }
 
 select{
