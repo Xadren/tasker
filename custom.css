@@ -129,7 +129,7 @@ li>.cat-color{
 }
 
 section.tasker-list{
-    display: inline-block;
+    display: flex;
     padding: 5px;
     margin-left: 16%;
     padding-top: 75px;
