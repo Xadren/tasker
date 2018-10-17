@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
 
     confirm_add_project.addEventListener("click", event => {
+        let valid = true;
         const project_name = document.querySelector("input[name='project-name']").value;
         const due_date = document.querySelector("input[name='due-date']").value;
         const category_select = document.querySelector(".project-categories");
@@ -28,19 +29,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
             // get the task description for this task
             const task_description = document.querySelector(`textarea.task-description[data-task-num='${task_num}'`).value;
             const task_weighting = document.querySelector(`input.task-weight[data-task-num='${task_num}'`).value;
-
+            if(task_name === "" || task_weighting === ""){
+                valid = false;
+            }
             tasks.push({
                 name: task_name,
                 description: task_description,
                 weight: task_weighting
             });
         })
-        const project = new Project(project_name, due_date, category, tasks);
-
-        __projects.push(project);
-
-        taskerList.update(__projects);
-        project_modal.close();
+        if(valid){
+            const project = new Project(project_name, due_date, category, tasks);
+    
+            __projects.push(project);
+    
+            taskerList.update(__projects);
+            project_modal.close();
+        } else {
+            alert("Fields marked with an * are required fields.");
+        }
     })
 
     close_project_modal.addEventListener("click", event => {
@@ -81,15 +88,16 @@ class TaskerList{
         const name = project.name;
         const due_date = project.due_date;
         let tasks = new String();
-        debugger;
         project.tasks.forEach(task => {
-            tasks += `
-                <div class="task">
-                    <strong>${task.name}</strong><br/>
-                    <small>${task.weight}%</small><br/>
-                    <p>${task.description}</p>
-                </div>
-            `;
+            if(task.name != "" && task.weight != ""){
+                tasks += `
+                    <div class="task">
+                        <strong>${task.name}</strong><br/>
+                        <small>${task.weight}%</small><br/>
+                        <p>${task.description}</p>
+                    </div>
+                `;
+            }
         })
 
         const template = `
@@ -153,15 +161,15 @@ class ProjectModal{
                 <input type="text" name="task-name" class="task-name" data-task-num="0" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Task Name</label>
+                <label>Task Name *</label>
             </div>
             <div class="input-group">      
-                <input type="number" name="task-weight" class="task-weight" data-task-num="0" required>
+                <input type="number" name="task-weight" class="task-weight" data-task-num="0" min="0" max="100" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Weight</label>
+                <label>Weight(%) *</label>
             </div>
-            <div class="input-group">      
+            <div class="input-group description-group">      
                 <textarea data-task-num="0" class="task-description"></textarea>
                 <span class="highlight"></span>
                 <span class="bar"></span>
@@ -190,15 +198,15 @@ class ProjectModal{
                 <input type="text" name="task-name" class="task-name" data-task-num="${last_task_num + 1}" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Task Name</label>
+                <label>Task Name *</label>
             </div>
             <div class="input-group">      
-                <input type="number" name="task-weight" class="task-weight" data-task-num="${last_task_num + 1}" required>
+                <input type="number" name="task-weight" class="task-weight" data-task-num="${last_task_num + 1}" min="0" max="100" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Weight</label>
+                <label>Weight(%) *</label>
             </div>
-            <div class="input-group">      
+            <div class="input-group description-group">      
                 <textarea data-task-num="${last_task_num + 1}" class="task-description"></textarea>
                 <span class="highlight"></span>
                 <span class="bar"></span>

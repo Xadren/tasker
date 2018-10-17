@@ -14,6 +14,7 @@ body{
 .footer{
     position: absolute;
     bottom: 90px;
+    padding: 5px;
 }
 .footer>span{
     height: 10px;
@@ -241,9 +242,21 @@ button#add-project:hover{
 .date-group{
     width: 150px;
 }
+
+.description-group{
+    width: 205px;
+}
 .input-group:first-of-type{
     margin-left: 0px;
 }
+
+.project-details{
+    display: flex;
+}
+
+/* .project-details>.input-group{
+    margin-left:0px;
+} */
 input, textarea, select{
     position: relative;
     font-size:18px;
@@ -255,8 +268,16 @@ input, textarea, select{
     border-radius: 2px;
     background-color: #dad9d9;
 }
+
+select{
+    height: 42px;
+}
 input:focus, textarea:focus, select:focus{ 
     outline:none;
+}
+
+input[name="due-date"]{
+    font-size: 14px;
 }
 
 label{
@@ -315,6 +336,16 @@ input:focus ~ .bar:before, input:focus ~ .bar:after, textarea:focus ~ .bar:befor
     left:0;
     pointer-events:none;
     opacity:0.5;
+}
+
+
+.search-group{
+    width: 300px;
+    margin-right: 15px !important;
+}
+
+#task-filter{
+    width: 120px;
 }
 
 [tooltip]{
