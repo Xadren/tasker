@@ -17,15 +17,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     confirm_add_project.addEventListener("click", event => {
         const project_name = document.querySelector("input[name='project-name']").value;
         const due_date = document.querySelector("input[name='due-date']").value;
+        const category_select = document.querySelector(".project-categories");
+        const category = category_select.options[category_select.selectedIndex].value
         const tasks = new Array();
         // Get all the task names.
-        const task_names = document.querySelectorAll("input.project-task");
+        const task_names = document.querySelectorAll(".task-group");
         [].slice.call(task_names).forEach(task =>{
             const task_num = task.dataset.taskNum;
+            const task_name = document.querySelector(`input.task-name[data-task-num='${task_num}'`).value;
             // get the task description for this task
-            const task_description = document.querySelector(`textarea.project-task-description[data-task-num='${task_num}'`).value;
-            const task_weighting = document.querySelector(`input.task-weighting[data-task-num='${task_num}'`).value;
-            const task_name = task.value;
+            const task_description = document.querySelector(`textarea.task-description[data-task-num='${task_num}'`).value;
+            const task_weighting = document.querySelector(`input.task-weight[data-task-num='${task_num}'`).value;
 
             tasks.push({
                 name: task_name,
@@ -33,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 weight: task_weighting
             });
         })
-        const project = new Project(project_name, due_date, tasks);
+        const project = new Project(project_name, due_date, category, tasks);
 
         __projects.push(project);
 
@@ -79,6 +81,7 @@ class TaskerList{
         const name = project.name;
         const due_date = project.due_date;
         let tasks = new String();
+        debugger;
         project.tasks.forEach(task => {
             tasks += `
                 <div class="task">
@@ -90,7 +93,7 @@ class TaskerList{
         })
 
         const template = `
-            <div class="project">
+            <div class="project ${project.category}">
                 <h1>${name}</h1>
                 <strong>Due Date:</strong> ${due_date}
                 <h2>Tasks</h2>
@@ -106,10 +109,11 @@ class TaskerList{
 
 
 class Project{
-    constructor(name, due_date, tasks){
+    constructor(name, due_date, category, tasks){
         this.name = name;
         this.due_date = due_date;
         this.tasks = tasks;
+        this.category = category;
     }
 }
 
@@ -131,7 +135,7 @@ class ProjectModal{
         const current_month = current_date.getMonth() + 1; // We add one to the month because the getMonth() returns a 0 based value.
         const current_year = current_date.getFullYear();
         const current_date_string =`${current_year}-${current_month < 10 ? `0${current_month}` : current_month}-${current_day}`;
-        const date_input = document.querySelector(".project-form>input[name='due-date']");
+        const date_input = document.querySelector(".project-form>.project-details>.input-group>input[name='due-date']");
         date_input.value = current_date_string;
 
         // Clear the project name
@@ -140,25 +144,30 @@ class ProjectModal{
         // Reset the project tasks.
         const tasks_div = document.querySelector(".project-tasks");
         while(tasks_div.firstChild){
-            // if(tasks_div.firstChild.nodeName != "BUTTON"){
                 tasks_div.removeChild(tasks_div.firstChild);
-            // }
         }
 
         tasks_div.insertAdjacentHTML('afterbegin', `
-        <div class="project-tasks_left">
-            <strong class="task-name-title">Task Name</strong><br/>
-            <input type="text" class="project-task" placeholder="2.1 Proposal Presentation" data-task-num="0">
-        </div>
-        <div class="project-tasks_middle">
-                <strong class="task-name-title">Task Description</strong><br/>
-                <textarea class="project-task-description" data-task-num="0"></textarea>
+        <div class="task-group" data-task-num="0">
+            <div class="input-group">      
+                <input type="text" name="task-name" class="task-name" data-task-num="0" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Task Name</label>
             </div>
-        <div class="project-tasks_right">
-            <strong class="task-weight-title">Weighting (%)</strong><br/>
-            <input type="number" class="task-weighting" min="0" max="100" data-task-num="0">
+            <div class="input-group">      
+                <input type="number" name="task-weight" class="task-weight" data-task-num="0" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Weight</label>
+            </div>
+            <div class="input-group">      
+                <textarea data-task-num="0" class="task-description"></textarea>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Description</label>
+            </div>
         </div>
-        <br/><br/>
         `)
         this.modal.style.display = "block";
     }
@@ -171,15 +180,32 @@ class ProjectModal{
     }
 
     newTask(){
-        const tasks_right = document.querySelector(".project-tasks_right");
-        const tasks_left = document.querySelector(".project-tasks_left");
-        const tasks_middle = document.querySelector(".project-tasks_middle");
+        const project_tasks = document.querySelector(".project-tasks");
         // Here we create an array of project task elements so that we can get the last of the elements to increment the task number.
-        let last_task_num = [].slice.call(document.querySelectorAll(".project-task"));
+        let last_task_num = [].slice.call(document.querySelectorAll(".task-group"));
         last_task_num = parseInt(last_task_num[last_task_num.length - 1].dataset.taskNum, 10);
-        tasks_left.insertAdjacentHTML('beforeend', `<br/><input type="text" class="project-task" placeholder="2.1 Proposal Presentation" data-task-num="${last_task_num + 1}">`);
-        tasks_right.insertAdjacentHTML('beforeend', `<br/><input type="number" class="task-weighting" min="0" max="100" data-task-num="${last_task_num + 1}">`);
-        tasks_middle.insertAdjacentHTML('beforeend', `<br/><textarea class="project-task-description" data-task-num="${last_task_num + 1}"></textarea>`);
+        project_tasks.insertAdjacentHTML('beforeend',`
+        <div class="task-group" data-task-num="${last_task_num + 1}">
+            <div class="input-group">      
+                <input type="text" name="task-name" class="task-name" data-task-num="${last_task_num + 1}" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Task Name</label>
+            </div>
+            <div class="input-group">      
+                <input type="number" name="task-weight" class="task-weight" data-task-num="${last_task_num + 1}" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Weight</label>
+            </div>
+            <div class="input-group">      
+                <textarea data-task-num="${last_task_num + 1}" class="task-description"></textarea>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Description</label>
+            </div>
+        </div>
+        `);
     }
     /**
      * Clear the form in the project modal.

@@ -19,7 +19,11 @@
             </div>
             <div class="nav-right">
                 <img src="images/search.svg" alt="Search icon" class="search-icon"/>
-                <input type="text" name="search-input" placeholder="Search" />
+                <div class="input-group">      
+                        <input type="text" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                    </div>
                 <select name="task-filter" id="task-filter">
                     <option value="day" class="filter-option">Days</option>
                     <option value="week" class="filter-option">Week</option>
@@ -38,7 +42,10 @@
                         <li><div class="cat-color personal-cat"></div>Personal</li>
                     </ul>
                 </div>
-                
+                <div class="footer">
+                    <span><small>A project by Alex Griffiths</small></span><br/>
+                    <span><a href="https://github.com/Xadren/tasker" target="_blank">GitHub Repo</a></span>
+                </div>
             </section>
             <!-- The main section that will display all the tasks that meet the current filter. -->
             <section class="tasker-list">
@@ -58,27 +65,38 @@
     
                         <div id="project-modal_body">
                             <form class="project-form">
-                                <label for="project-name">Project Name</label>: <input type="name" placeholder="Assignment 2" name="project-name"><br/>
-                                <label for="due-date">Due Date</label>: <input type="date" name="due-date" value=""><br/>
+                                <div class="project-details">
+                                    <div class="input-group project-name-group">   
+                                        <strong>Project Name:</strong>
+                                        <input type="text" name="project-name" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                    </div>
+                                    <br/>
+                                    <div class="input-group date-group">
+                                        <strong>Due Date:</strong>
+                                        <input type="date" name="due-date" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                    </div>
+                                    <br/>
+                                    <div class="input-group category-group">
+                                        <strong>Category:</strong>
+                                        <select name="project-category" class="project-categories">
+                                            <option value="uni">Uni</option>
+                                            <option value="work">Work</option>
+                                            <option value="personal">Personal</option>
+                                        </select>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
                                 <hr>
                                 <h2>Tasks</h2>
                                 <div class="project-tasks">
-                                    <div class="project-tasks_left">
-                                        <strong class="task-name-title">Task Name</strong><br/>
-                                        <input type="text" class="project-task" placeholder="2.1 Proposal Presentation" data-task-num="0">
-                                    </div>
-                                    <div class="project-tasks_middle">
-                                            <strong class="task-name-title">Task Description</strong><br/>
-                                            <textarea class="project-task-description" data-task-num="0"></textarea>
-                                        </div>
-                                    <div class="project-tasks_right">
-                                        <strong class="task-weight-title">Weighting (%)</strong><br/>
-                                        <input type="number" class="task-weighting" min="0" max="100" data-task-num="0">
-                                    </div>
                                     <br/><br/>
-
                                 </div>
-                                <button type="button" id="new-task-button">New Task +</button>
+                                <button type="button" id="new-task-button">New Task</button>
                                  
                             </form>                            
                         </div>

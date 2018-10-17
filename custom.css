@@ -6,14 +6,30 @@ body{
     font-family: futura-pt, sans-serif;
     font-weight: normal;
     font-style: normal;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 
+
+.footer{
+    position: absolute;
+    bottom: 90px;
+}
+.footer>span{
+    height: 10px;
+    color: #757575;
+}
+
+.footer>span>a{
+    color: #FBB03B;
+    text-decoration: underline;    
+}
 nav{
     display: flex;
     padding: 3px;
     width: 100vw;
     height: 60px;
-    border-bottom: 2px solid #dad9d9;
+    border-bottom: 1px solid #dad9d9;
     align-content: space-between;
 }
 
@@ -27,7 +43,6 @@ nav>.nav-left>h1{
     font-size: 22px;
     margin: auto 0px;
     opacity: .54;
-    letter-spacing: 1px;
 }
 nav>.nav-left>*{
     display: inline-block;
@@ -51,7 +66,7 @@ section.tasker-left{
     height: 100vh;
     position: fixed;
     width: 15%;
-    border-right: 2px solid #dad9d9;
+    border-right: 1px solid #dad9d9;
     padding: 3px;
 }
 
@@ -67,12 +82,25 @@ img.search-icon{
     margin: auto 5px auto 0px;
 }
 
+.categories{
+    margin-left: 20px;
+}
+
 .categories>h1{
     opacity: .54;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 10px 0px;
 }
 
 .categories>ul{
     list-style:none;
+    padding: 0px;
+}
+
+.categories>ul>li{
+    display: flex;
+    margin: 5px 0px;
 }
 
 li>.cat-color{
@@ -80,6 +108,8 @@ li>.cat-color{
     height: 20px;
     border-radius: 4px;
     display: inline-block;
+    margin-right: 7px;
+
 }
 
 .uni-cat{
@@ -97,7 +127,32 @@ li>.cat-color{
 section.tasker-list{
     display: inline-block;
     padding: 5px;
-    margin-left: 15%;
+    margin-left: 16%;
+}
+
+.project{
+    width: 250px;
+    height: auto;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+    padding: 10px;
+}
+
+.project>h1{
+    margin-top: 5px
+}
+
+.uni{
+    background-color: #ed0033;
+}
+
+.work{
+    background-color: #21cc44;
+}
+
+.personal{
+    background-color: #0051ff;
 }
 .modal {
     display:none;
@@ -108,32 +163,40 @@ section.tasker-list{
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content{
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #000;
-    width: 80%;
+    border: 1px solid #dad9d9;
+    width: 500px;
+    border-radius: 5px;
+    box-shadow:0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
 }
 
-.project-tasks_left, .project-tasks_right, .project-tasks_middle{
-    padding-top: 10px;
-    display: inline-block;
-    vertical-align: top;
-}
-.task-weight-title, .task-name-title{
-    margin-bottom: 10px;
+button{
+    border:none;
+    width: 88px;
+    height: 32px;
+    border-radius: 3px;
+    color: black;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    margin: 1px 2.5px;
 }
 
+#confirm-add-project{
+    background-color: #FBB03B;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+}
 button#add-project{
+    outline:none;
     background-color:#FBB03B;
     border-radius: 50px;
-    right: 25px;
-    bottom: 25px;
+    right: 0px;
+    bottom: 0px;
     position: absolute;
     width: 56px;
     height: 56px;
@@ -141,11 +204,117 @@ button#add-project{
     color: white;
     border: none;
     box-shadow:0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
 }
 
 button#add-project:hover{
     box-shadow:0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
-    opacity: 0.9;
+    background-color: #ffc262;
+}
+
+
+.task-group{
+    display: flex;
+    margin-bottom: 5px;
+}
+/* 
+    Part of these input styles - specifically the how the label and bar/highlighter work
+    are based on code by Chris Sevilleja (which can be found here: https://codepen.io/sevilayha/pen/IdGKH)
+
+    I've modified it to suit my needs, which mainly consisted of changing some of the colours, 
+    but I've also tweaked some of the default styling for the inputs too as well as updated
+    the code to make sure that textarea elements will be styled correctly too.
+
+    I've also changed it so that inputs can be different sizes, and the active state bar will
+    still be the appropriate size.
+*/
+.input-group{ 
+    position:relative; 
+    /* margin-bottom:45px; */
+    margin: 0px 10px;
+    width: 120px;
+    display: inline-block;
+}
+
+.date-group{
+    width: 150px;
+}
+.input-group:first-of-type{
+    margin-left: 0px;
+}
+input, textarea, select{
+    position: relative;
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:100%;
+    border:none;
+    border-bottom:1px solid #757575;
+    border-radius: 2px;
+    background-color: #dad9d9;
+}
+input:focus, textarea:focus, select:focus{ 
+    outline:none;
+}
+
+label{
+    color:#999; 
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+}
+
+input:focus ~ label, input:valid ~ label, textarea:focus ~ label, select:focus ~ label{
+    top:-20px;
+    font-size:14px;
+    color:#FBB03B;
+}
+
+
+.bar{ 
+    position:relative; display:block; width: calc(100% + 15px); 
+}
+
+.bar:before, .bar:after{
+    content:'';
+    height:2px; 
+    width:0;
+    bottom:1px; 
+    position:absolute;
+    background:#FBB03B; 
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+}
+
+.bar:before{
+    left:50%;
+}
+
+.bar:after{
+    right:50%; 
+}
+
+input:focus ~ .bar:before, input:focus ~ .bar:after, textarea:focus ~ .bar:before, select:focus ~ .bar:after, select:focus ~ .bar:before, textarea:focus ~ .bar:after {
+    width:50%;
+}
+
+.highlight {
+    position:absolute;
+    height:60%; 
+    width:100px; 
+    top:25%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
 }
 
 [tooltip]{
@@ -169,6 +338,10 @@ button#add-project:hover{
     padding: 4px 4px;
     z-index:99;
     opacity:0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-delay: 0.5s;
+    transition-timing-function: ease-in;
 }
 
 [tooltip-position='left']::before{
@@ -185,6 +358,6 @@ button#add-project:hover{
     transform: translateX(-100%)   translateY(-50%);
 }
 
-[tooltip]:hover::after,[tooltip]:hover::before {
+[tooltip]:hover::after{
     opacity:1
  }
