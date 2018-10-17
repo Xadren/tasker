@@ -8,12 +8,13 @@ body{
     font-style: normal;
     font-size: 16px;
     letter-spacing: 1px;
+    overflow-x: hidden;
 }
 
 
 .footer{
     position: absolute;
-    bottom: 90px;
+    bottom: 75px;
     padding: 5px;
 }
 .footer>span{
@@ -26,6 +27,8 @@ body{
     text-decoration: underline;    
 }
 nav{
+    background-color: white;
+    position: fixed;
     display: flex;
     padding: 3px;
     width: 100vw;
@@ -63,7 +66,7 @@ nav>.nav-right>*{
 
 section.tasker-left{
     display: inline-block;
-    margin-top: 0px;
+    margin-top: 66px;
     height: 100vh;
     position: fixed;
     width: 15%;
@@ -129,6 +132,11 @@ section.tasker-list{
     display: inline-block;
     padding: 5px;
     margin-left: 16%;
+    padding-top: 75px;
+}
+
+.task>p{
+    overflow-wrap: break-word;
 }
 
 .project{
@@ -138,6 +146,7 @@ section.tasker-list{
     color: white;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
     padding: 10px;
+    margin: 10px;
 }
 
 .project>h1{
@@ -215,10 +224,13 @@ button#add-project:hover{
     background-color: #ffc262;
 }
 
+#project-modal_actions{
+    text-align: right;
+}
 
 .task-group{
     display: flex;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 /* 
     Part of these input styles - specifically the how the label and bar/highlighter work
@@ -298,7 +310,6 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, select:focus ~
     font-size:14px;
     color:#FBB03B;
 }
-
 
 .bar{ 
     position:relative; display:block; width: calc(100% + 15px); 
